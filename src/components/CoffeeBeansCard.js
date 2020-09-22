@@ -1,21 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import coffeeImage from '../images/coffee-beans.png';
+import coffeeImage from '../images/Roasted-coffee-beans.jpg';
 
-const CoffeeBeansCard = () => {
-    const [buttonText, setButtonText] = useState('Purchase');
-    const [isPurchased, setIsPurchased] = useState(false);
-    const handlePurchase = () => {
-        setButtonText('Purchased');
-        setIsPurchased(true);
-    };
+const CoffeeBeansCard = ({ onAdd }) => {
+    const handleAdd = () => {
+        onAdd();
+    }
 
     return (
-    <Container>
-        <Card className="text-center">
-        {isPurchased && <Card.Header>You have purchased the best coffee beans in the world!</Card.Header>}
+        <Card style={{ width: '25rem' }}>
         <Card.Img variant="top" src={coffeeImage} />
         <Card.Body>
             <Card.Title>The best coffee beans in the world</Card.Title>
@@ -24,14 +18,13 @@ const CoffeeBeansCard = () => {
             </Card.Text>
             <Button
                 variant="primary"
-                data-testid="purchaseButton"
-                onClick={handlePurchase}
+                data-testid="addButton"
+                onClick={handleAdd}
             >
-                {buttonText}
+                ADD TO CART
             </Button>
         </Card.Body>
         </Card>
-    </Container>
     );
 };
 

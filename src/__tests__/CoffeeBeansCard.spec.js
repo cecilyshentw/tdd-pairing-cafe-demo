@@ -7,19 +7,20 @@ import {
 import CoffeeBeansCard from '../components/CoffeeBeansCard';
 
 describe('<CoffeeBeansCard />', () => {
-  let getByTestId;
+    let getByTestId;
+    let addHandler;
+    afterEach(cleanup);
 
-  afterEach(cleanup);
+    describe('clicking the add button', () => {
+        beforeEach(() => {
+            addHandler=jest.fn();
+            ({ getByTestId } = render(<CoffeeBeansCard onAdd={addHandler}/>));
 
-  describe('clicking the purchase button', () => {
-    beforeEach(() => {
-      ({ getByTestId } = render(<CoffeeBeansCard />));
+            fireEvent.click(getByTestId('addButton'));
+        });
 
-      fireEvent.click(getByTestId('purchaseButton'));
+        it('calls the addHandler', () => {
+            expect(addHandler).toHaveBeenCalled();
+        });
     });
-
-    it('changes the button text to Purchased', () => {
-      expect(getByTestId('purchaseButton')).toHaveTextContent('Purchased');
-    });
-  });
 });
